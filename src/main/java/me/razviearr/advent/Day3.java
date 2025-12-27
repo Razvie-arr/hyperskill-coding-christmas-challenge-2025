@@ -113,10 +113,7 @@ public class Day3 {
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
             int currentCount = charToCount.merge(c, 1, Integer::sum);
-
-            if (currentCount > maxCount) {
-                maxCount = currentCount;
-            }
+            maxCount = Math.max(maxCount, currentCount);
         }
         if (maxCount >= password.length() * 0.3) {
             return maxCount;
