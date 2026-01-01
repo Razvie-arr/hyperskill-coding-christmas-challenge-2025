@@ -33,12 +33,6 @@ import java.util.Set;
 
 public class Day3 {
 
-    public static void main(String[] args) {
-        List<String> input = InputReader.readLines("inputs/day3_dataset.txt");
-        Day3 day3 = new Day3(input);
-        System.out.println(day3.calculateBestPassword());
-    }
-
     @NotNull
     private final List<String> passwords;
     private static final Set<Character> SPECIAL_SYMBOLS = Set.of('!', '@', '#', '$', '%', '^', '&', '*');
@@ -122,4 +116,14 @@ public class Day3 {
         return 0;
     }
 
+}
+
+class Day3Runner {
+
+    public static void main(String[] args) {
+        List<String> input = InputReader.readLines("inputs/day3_dataset.txt");
+        Day3 day3 = new Day3(input);
+        System.out.println(day3.calculateBestPassword());
+    }
+    
 }

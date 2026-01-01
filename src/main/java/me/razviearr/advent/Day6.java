@@ -68,7 +68,7 @@ public class Day6 {
 
 }
 
-class Runner {
+class Day6Runner {
 
     public static void main(String[] args) {
         List<String> inputLines = InputReader.readLines("inputs/day6_dataset.txt");

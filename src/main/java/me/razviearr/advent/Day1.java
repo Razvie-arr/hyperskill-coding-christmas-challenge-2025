@@ -4,7 +4,12 @@ import me.razviearr.advent.utils.InputReader;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static me.razviearr.advent.Day1.findTheMostCommonError;
 
 /**
  * Welcome to your new job at North Pole Technologies, your best provider of every winter holiday! As you should already know, we at NPT host a once-in-a-year programming internship, which we've dubbed "Twelve Days of Coding"! You and your colleagues will tackle 12 challenging tasks, one each day, carefully crafted by our team lead, Mr. Frost! Only the best performing developers will be able to continue working on our fabulous projects, so don't get too cozy. Less talking, more grinding! Just follow the lyrics of our theme song!
@@ -17,6 +22,21 @@ import java.util.*;
  */
 public class Day1 {
 
+    @NotNull
+    public static String findTheMostCommonError(@NotNull List<String> input) {
+        Map<String, Integer> countToError = new HashMap<>();
+        for (String line : input) {
+            String error = line.split(" ")[1];
+            countToError.merge(error, 1, Integer::sum);
+        }
+        Optional<Map.Entry<String, Integer>> theMostCommonError = countToError.entrySet().stream().max(Map.Entry.comparingByValue());
+        return theMostCommonError.map(Map.Entry::getKey).orElseThrow(() -> new IllegalStateException("The most common error not found!"));
+    }
+
+}
+
+class Day1Runner {
+
     public static void main(String[] args) {
         List<String> input = InputReader.readLines("inputs/day1_dataset.txt");
         String backgroundNoiseError = findTheMostCommonError(input);
@@ -28,17 +48,6 @@ public class Day1 {
             return !time.isBefore(from) && !time.isAfter(to) && !backgroundNoiseError.equals(error);
         }).toList();
         System.out.println(findTheMostCommonError(incidentErrors));
-    }
-
-    @NotNull
-    private static String findTheMostCommonError(@NotNull List<String> input) {
-        Map<String, Integer> countToError = new HashMap<>();
-        for(String line : input) {
-            String error = line.split(" ")[1];
-            countToError.merge(error, 1, Integer::sum);
-        }
-        Optional<Map.Entry<String, Integer>> theMostCommonError = countToError.entrySet().stream().max(Map.Entry.comparingByValue());
-        return theMostCommonError.map(Map.Entry::getKey).orElseThrow(() -> new IllegalStateException("The most common error not found!"));
     }
 
 }

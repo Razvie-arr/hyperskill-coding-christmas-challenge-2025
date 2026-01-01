@@ -29,20 +29,6 @@ import java.util.Map;
 
 public class Day4 {
 
-    public static void main(String[] args) {
-        List<String> logLines = InputReader.readLines("inputs/day4_dataset.txt");
-        List<Log> logs = new ArrayList<>();
-        for (var line : logLines) {
-            String[] split = line.split(",");
-            // ignoring elf name
-            Action action = Action.valueOf(split[1].toUpperCase());
-            int id = Integer.parseInt(split[2]);
-            logs.add(new Log(action, id));
-        }
-        Day4 day4 = new Day4(logs);
-        System.out.println(day4.calculateContentions());
-    }
-
     @NotNull
     private final Map<Integer, Fork> forkIdToFork = new HashMap<>();
     @NotNull
@@ -101,4 +87,22 @@ public class Day4 {
     public record Log(@NotNull Action action, int id) {
     }
 
+}
+
+class Day4Runner {
+
+    public static void main(String[] args) {
+        List<String> logLines = InputReader.readLines("inputs/day4_dataset.txt");
+        List<Day4.Log> logs = new ArrayList<>();
+        for (var line : logLines) {
+            String[] split = line.split(",");
+            // ignoring elf name
+            Day4.Action action = Day4.Action.valueOf(split[1].toUpperCase());
+            int id = Integer.parseInt(split[2]);
+            logs.add(new Day4.Log(action, id));
+        }
+        Day4 day4 = new Day4(logs);
+        System.out.println(day4.calculateContentions());
+    }
+    
 }

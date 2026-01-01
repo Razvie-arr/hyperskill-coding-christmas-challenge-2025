@@ -19,14 +19,7 @@ import java.util.List;
  */
 public class Day2 {
 
-    public static void main(String[] args) {
-        List<String> input = InputReader.readLines("inputs/day2_dataset.txt");
-        int targetSweetness = Integer.parseInt(input.getFirst());
-        List<Integer> sweetnesses = Arrays.stream(input.get(1).split(",")).map(Integer::parseInt).toList();
-        System.out.println(findCombination(targetSweetness, sweetnesses));
-    }
-
-    private static double findCombination(int target, List<Integer> sweetnesses) {
+    public static double findCombination(int target, List<Integer> sweetnesses) {
         int left = 0;
         int right = sweetnesses.size() - 1;
         double bestAverage = (double) (sweetnesses.get(left) + sweetnesses.get(right)) / 2;
@@ -48,6 +41,17 @@ public class Day2 {
             }
         }
         return bestAverage;
+    }
+
+}
+
+class Day2Runner {
+
+    public static void main(String[] args) {
+        List<String> input = InputReader.readLines("inputs/day2_dataset.txt");
+        int targetSweetness = Integer.parseInt(input.getFirst());
+        List<Integer> sweetnesses = Arrays.stream(input.get(1).split(",")).map(Integer::parseInt).toList();
+        System.out.println(Day2.findCombination(targetSweetness, sweetnesses));
     }
 
 }

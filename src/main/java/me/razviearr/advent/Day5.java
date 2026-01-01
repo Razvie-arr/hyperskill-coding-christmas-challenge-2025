@@ -19,18 +19,6 @@ import java.util.List;
  */
 public class Day5 {
 
-    public static void main(String[] args) {
-        List<String> lines = InputReader.readLines("inputs/day5_dataset.txt");
-        List<Coordinate> coordinates = new ArrayList<>();
-        for (String line : lines) {
-            String[] parts = line.split(",");
-            coordinates.add(new Coordinate(Double.parseDouble(parts[0]), Double.parseDouble(parts[1])));
-        }
-        Day5 day5 = new Day5(coordinates);
-        double starArea = day5.calculateArea();
-        System.out.printf("%.2f", starArea);
-    }
-
     @NotNull
     private final List<Coordinate> coordinates;
 
@@ -73,6 +61,22 @@ public class Day5 {
     }
 
     public record Coordinate(double x, double y) {
+    }
+
+}
+
+class Day5Runner {
+
+    public static void main(String[] args) {
+        List<String> lines = InputReader.readLines("inputs/day5_dataset.txt");
+        List<Day5.Coordinate> coordinates = new ArrayList<>();
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            coordinates.add(new Day5.Coordinate(Double.parseDouble(parts[0]), Double.parseDouble(parts[1])));
+        }
+        Day5 day5 = new Day5(coordinates);
+        double starArea = day5.calculateArea();
+        System.out.printf("%.2f", starArea);
     }
 
 }
