@@ -12,9 +12,6 @@ import java.util.stream.Collectors;
 
 public class InputReader {
 
-    /**
-     * Reads a file from src/main/resources and returns it as a List of Strings.
-     */
     public static List<String> readLines(@NotNull String filename) {
         try (InputStream is = InputReader.class.getClassLoader().getResourceAsStream(filename)) {
             if (is == null) {
@@ -26,24 +23,6 @@ public class InputReader {
         } catch (IOException e) {
             throw new RuntimeException("Failed to read input file: " + filename, e);
         }
-    }
-
-    /**
-     * Returns the entire file as a single String (useful for grid-based puzzles).
-     */
-    public static String readString(@NotNull String filename) {
-        return String.join("\n", readLines(filename));
-    }
-
-    /**
-     * Helper for puzzles that are just a list of numbers.
-     */
-    public static List<Integer> readInts(@NotNull String filename) {
-        return readLines(filename).stream()
-                .map(String::trim)
-                .filter(line -> !line.isEmpty())
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
 }
